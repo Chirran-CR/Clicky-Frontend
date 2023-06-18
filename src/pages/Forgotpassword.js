@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import { forgotPasswordToken } from "../features/User/userSlice";
 
 const emailSchema = yup.object({
   email: yup
@@ -28,6 +29,8 @@ const Forgotpassword = () => {
       //   if(authState.isSuccess){
       //     navigate("/");
       //   }
+      dispatch(forgotPasswordToken(values));
+      navigate("/");
     },
   });
   return (
