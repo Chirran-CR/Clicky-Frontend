@@ -1,6 +1,15 @@
 import axios from "axios";
-import { base_url, config } from "../../utils/axiosConfig";
+import { base_url,  config} from "../../utils/axiosConfig";
 
+// const getTokenFromLocalStorage = localStorage.getItem("customer") ? JSON.parse(localStorage.getItem("customer")):null;
+
+// export const config = {
+//     headers: {
+//         Authorization: `Bearer ${getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+//         }`,
+//         Accept: "application/json",
+//     }
+// }
 const register = async (userData) => {
   const response = await axios.post(`${base_url}user/register`, userData);
   if (response.data) {
@@ -66,7 +75,7 @@ const getUserOrders = async () => {
 }
 
 const updateUser = async (data) => {
-  const response = await axios.put(`${base_url}user/edit-user`,data,config);
+  const response = await axios.put(`${base_url}user/edit-user`,data.data,data.config2);
   if(response.data){
     return response.data;
   }

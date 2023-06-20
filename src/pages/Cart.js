@@ -12,6 +12,18 @@ import {
   updateCartProduct,
 } from "../features/User/userSlice";
 const Cart = () => {
+  const getTokenFromLocalStorage = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+      }`,
+      Accept: "application/json",
+    },
+  };
   const dispatch = useDispatch();
   const userCartState = useSelector((state) => state?.auth?.cartProducts);
   const [productUpdateDetail, setProductUpdateDetail] = useState(null);

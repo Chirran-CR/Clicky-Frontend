@@ -5,9 +5,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../features/User/userSlice";
-import {FiEdit} from "react-icons/fi";
-
-
+import { FiEdit } from "react-icons/fi";
 
 const profileSchema = yup.object({
   firstname: yup.string().required("First Name is required"),
@@ -20,6 +18,18 @@ const profileSchema = yup.object({
 });
 
 const Profile = () => {
+  const getTokenFromLocalStorage = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+      }`,
+      Accept: "application/json",
+    },
+  };
   const dispatch = useDispatch();
   const userState = useSelector((state) => state?.auth?.user);
   const [edit, setEdit] = useState(true);
@@ -38,7 +48,7 @@ const Profile = () => {
       //   if (authState.isSuccess) {
       //     navigate("/");
       //   }
-      dispatch(updateProfile(values));
+      dispatch(updateProfile({data:values,config2:config2}));
       setEdit(false);
     },
   });
@@ -50,7 +60,7 @@ const Profile = () => {
           <div className="col-12">
             <div className="d-flex justify-content-between align-items-center">
               <h5 className="my-3">Update Profile</h5>
-              <FiEdit className="fs-3" onClick={()=>setEdit(false)}/>
+              <FiEdit className="fs-3" onClick={() => setEdit(false)} />
             </div>
           </div>
           <div className="col-12">
@@ -66,8 +76,8 @@ const Profile = () => {
                   disabled={edit}
                   id="example1"
                   value={formik.values.firstname}
-                  onChange={formik.handleChange('firstname')}
-                  onBlur={formik.handleBlur('firstname')}
+                  onChange={formik.handleChange("firstname")}
+                  onBlur={formik.handleBlur("firstname")}
                 />
                 <div className="errors">
                   {formik.touched.firstname && formik.errors.firstname}
@@ -83,8 +93,8 @@ const Profile = () => {
                   className="form-control"
                   id="example2"
                   value={formik.values.lastname}
-                  onChange={formik.handleChange('lastname')}
-                  onBlur={formik.handleBlur('lastname')}
+                  onChange={formik.handleChange("lastname")}
+                  onBlur={formik.handleBlur("lastname")}
                   disabled={edit}
                 />
                 <div className="errors">
@@ -103,8 +113,8 @@ const Profile = () => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   value={formik.values.email}
-                  onChange={formik.handleChange('email')}
-                  onBlur={formik.handleBlur('email')}
+                  onChange={formik.handleChange("email")}
+                  onBlur={formik.handleBlur("email")}
                 />
                 <div className="errors">
                   {formik.touched.email && formik.errors.email}
@@ -121,8 +131,8 @@ const Profile = () => {
                   disabled={edit}
                   id="exampleInputEmail2"
                   value={formik.values.mobile}
-                  onChange={formik.handleChange('mobile')}
-                  onBlur={formik.handleBlur('mobile')}
+                  onChange={formik.handleChange("mobile")}
+                  onBlur={formik.handleBlur("mobile")}
                 />
                 <div className="errors">
                   {formik.touched.mobile && formik.errors.mobile}
