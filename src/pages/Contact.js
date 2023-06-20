@@ -11,22 +11,30 @@ import { createQuery } from "../features/contact/contactSlice";
 
 const contactSchema = yup.object({
   name: yup.string().required("Name is required"),
-  email: yup.string().nullable().email("Email should be valid").required("Email is required"),
-  mobile: yup.string().default('').nullable().required("Mobile number is required"),
-  comment: yup.string().default('').nullable().required("Comment is required"),
+  email: yup
+    .string()
+    .nullable()
+    .email("Email should be valid")
+    .required("Email is required"),
+  mobile: yup
+    .string()
+    .default("")
+    .nullable()
+    .required("Mobile number is required"),
+  comment: yup.string().default("").nullable().required("Comment is required"),
 });
 
 const Contact = () => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      name: '',
-      mobile: '',
-      email: '',
-      comment:'',
+      name: "",
+      mobile: "",
+      email: "",
+      comment: "",
     },
-    validationSchema:contactSchema,
-    onSubmit: values => {
+    validationSchema: contactSchema,
+    onSubmit: (values) => {
       dispatch(createQuery(values));
     },
   });
@@ -38,20 +46,24 @@ const Contact = () => {
         <div className="row">
           <div className="col-12">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6986.771103663534!2d76.99275607711007!3d28.886888929272477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390da5e51463d4c9%3A0xe5a485e2ac7c3d4a!2sMandaura%2C%20Haryana%20131103!5e0!3m2!1sen!2sin!4v1669909087902!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14969.117024259054!2d85.83812074114252!3d20.288705048906095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190a02602a6077%3A0xf05e2bdfacc51ae9!2sSaheed%20Nagar%2C%20Bhubaneswar%2C%20Odisha%20751007!5e0!3m2!1sen!2sin!4v1687243787786!5m2!1sen!2sin"
               width="600"
               height="450"
               className="border-0 w-100"
-              allowFullScreen=""
+              allowfullscreen=""
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
           <div className="col-12 mt-5">
             <div className="contact-inner-wrapper d-flex justify-content-between ">
               <div>
                 <h3 className="contact-title mb-4">Contact</h3>
-                <form action="" className="d-flex flex-column gap-15" onSubmit={formik.handleSubmit}>
+                <form
+                  action=""
+                  className="d-flex flex-column gap-15"
+                  onSubmit={formik.handleSubmit}
+                >
                   <div>
                     <input
                       type="text"
@@ -63,9 +75,7 @@ const Contact = () => {
                       value={formik.values.name}
                     />
                     <div className="errors">
-                      {
-                        formik.touched.name && formik.errors.name
-                      }
+                      {formik.touched.name && formik.errors.name}
                     </div>
                   </div>
                   <div>
@@ -79,9 +89,7 @@ const Contact = () => {
                       value={formik.values.email}
                     />
                     <div className="errors">
-                      {
-                        formik.touched.email && formik.errors.email
-                      }
+                      {formik.touched.email && formik.errors.email}
                     </div>
                   </div>
                   <div>
@@ -95,9 +103,7 @@ const Contact = () => {
                       value={formik.values.mobile}
                     />
                     <div className="errors">
-                      {
-                        formik.touched.mobile && formik.errors.mobile
-                      }
+                      {formik.touched.mobile && formik.errors.mobile}
                     </div>
                   </div>
                   <div>
@@ -113,9 +119,7 @@ const Contact = () => {
                       value={formik.values.comment}
                     ></textarea>
                     <div className="errors">
-                      {
-                        formik.touched.comment && formik.errors.comment
-                      }
+                      {formik.touched.comment && formik.errors.comment}
                     </div>
                   </div>
                   <div>
@@ -130,18 +134,18 @@ const Contact = () => {
                     <li className="mb-3 d-flex gap-15 align-items-center">
                       <AiOutlineHome className="fs-5" />
                       <address className="mb-0">
-                        Hno:277 , Near village chopal , Mandaura, Sonipat,
-                        Haryana
+                        Hno:277 , Near ISKCON , Saheed Nagar, Bhubaneswar,
+                        Odisha
                       </address>
                     </li>
                     <li className="mb-3 d-flex gap-15 align-items-center">
                       <BiPhoneCall className="fs-5" />
-                      <a href="tel:+91 8264954234">+91 8264954234</a>
+                      <a href="tel:+91 7008355564">+91 7008355564</a>
                     </li>
                     <li className="mb-3 d-flex gap-15 align-items-center">
                       <AiOutlineMail className="fs-5" />
-                      <a href="mailto:navdeepdahiya753@gmail.com">
-                        navdeepdahiya753@gmail.com
+                      <a href="mailto:swainchittaranjan345@gmail.com">
+                        swainchittaranjan345@gmail.com
                       </a>
                     </li>
                     <li className="mb-3 d-flex gap-15 align-items-center">

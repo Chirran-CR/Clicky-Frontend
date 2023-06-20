@@ -16,8 +16,8 @@ const Header = () => {
   const navigate = useNavigate();
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   const authState = useSelector((state) => state?.auth);
-  const productState = useSelector(state => state?.product?.product);
-  const [productOpt,setProductOpt] = useState([]);
+  const productState = useSelector((state) => state?.product?.product);
+  const [productOpt, setProductOpt] = useState([]);
 
   const [total, setTotal] = useState(null);
   const [paginate, setPaginate] = useState(true);
@@ -32,14 +32,14 @@ const Header = () => {
     setTotal(sum);
   }, [cartState]);
 
-  useEffect(()=>{
-    let data=[];
-    for(let index=0;index<productState.length;index++){
+  useEffect(() => {
+    let data = [];
+    for (let index = 0; index < productState.length; index++) {
       const element = productState[index];
-      data.push({id:index, prod:element?._id,name:element?.title});
+      data.push({ id: index, prod: element?._id, name: element?.title });
     }
     setProductOpt(data);
-  },[productState]);
+  }, [productState]);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -60,7 +60,7 @@ const Header = () => {
               <p className="text-end text-white mb-0">
                 Hotline:
                 <a className="text-white" href="tel:+91 8264954234">
-                  +91 8264954234
+                  +91 7008355564
                 </a>
               </p>
             </div>
@@ -70,21 +70,21 @@ const Header = () => {
       <header className="header-upper py-3">
         <div className="container-xxl">
           <div className="row align-items-center">
-            <div className="col-3">
+            <div className="col-2">
               <h2>
                 <Link className="text-white" to="/">
-                  Bindaas Bazaar
+                  Clicky
                 </Link>
               </h2>
             </div>
-            <div className="col-4">
+            <div className="col-6">
               <div className="input-group">
                 <Typeahead
                   id="pagination-example"
                   onPaginate={() => console.log("Results paginated")}
-                  onChange={(selected)=>{
+                  onChange={(selected) => {
                     navigate(`/product/${selected[0]?.prod}`);
-                    dispatch(getAProduct(selected[0]?.prod))
+                    dispatch(getAProduct(selected[0]?.prod));
                   }}
                   options={productOpt}
                   paginate={paginate}
@@ -97,7 +97,7 @@ const Header = () => {
                 </span>
               </div>
             </div>
-            <div className="col-5">
+            <div className="col-4">
               <div className="header-upper-links d-flex align-items-center justify-content-between">
                 <div>
                   {/* <Link
